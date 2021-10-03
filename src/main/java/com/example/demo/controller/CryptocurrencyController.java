@@ -20,9 +20,8 @@ public class CryptocurrencyController {
     }
 
 
-    //TODO param as filter[] //@RequestParam(value="myParam[]") String[] myParams
-    @GetMapping("/currencies/{currency}") //localhost:8080/currencies/BTC
-    public CryptocurrencyRates getRatesByCurrencies( //localhost:8080/currencies/BTC?filter[]=USDT&filter[]=ETH
+    @GetMapping("/currencies/{currency}")
+    public CryptocurrencyRates getRatesByCurrencies(
             @PathVariable String currency,
             @RequestParam(value = "filter", required = false, defaultValue = "") List<String> filter) {
         return cryptocurrencyService.getRatesByCurrencies(currency, filter);
