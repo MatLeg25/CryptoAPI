@@ -26,7 +26,7 @@ public class CryptocurrencyExchangeResponse {
 
     public CryptocurrencyExchangeResponse (CryptocurrencyExchangeRequest request, CryptocurrencyRates requestedRates) {
         this.setFrom(request.getFrom());
-        this.addRatesB(request, requestedRates);
+        this.addRatesMT(request, requestedRates);
         log.info(this.toString());
     }
 
@@ -56,7 +56,7 @@ public class CryptocurrencyExchangeResponse {
 
         try {
             for(int i=0;i<futures.size();i++) {
-                Exchange exchange = futures.get(0).get();
+                Exchange exchange = futures.get(i).get();
                 this.exchanges.add(exchange);
             }
         } catch (InterruptedException e) {

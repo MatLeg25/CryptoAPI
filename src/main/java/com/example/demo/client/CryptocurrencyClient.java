@@ -38,7 +38,7 @@ public class CryptocurrencyClient {
                     });
             response.setRates(ratesFiltered);
         }
-
+        log.info(response.toString());
         return response;
     }
 
