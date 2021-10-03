@@ -20,12 +20,14 @@ public class Exchange {
     private static double FEE = 0.01;
 
 
+    //TODO get proper currency Rate from client API
     public Exchange(CryptocurrencyExchangeRequest request, Double currencyRate, String currencyName) {
+        Double currencyRateEx = (1/currencyRate);
         LinkedHashMap<String, Double> rate = new LinkedHashMap<>();
-        rate.put("rate", currencyRate);
+        rate.put("rate", currencyRateEx);
         rate.put("amount", (double) request.getAmount());
-        rate.put("result", (request.getAmount() * (1-FEE)) * currencyRate);
-        rate.put("fee", request.getAmount() * FEE * currencyRate);
+        rate.put("result", ((request.getAmount() * (1-FEE)) * currencyRateEx));
+        rate.put("fee", (request.getAmount() * FEE * currencyRateEx));
         this.currencyExchange = rate;
         this.currencyName = currencyName;
     }
