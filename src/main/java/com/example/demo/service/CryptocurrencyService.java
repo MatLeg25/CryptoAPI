@@ -32,7 +32,6 @@ public class CryptocurrencyService {
         String source = request.getFrom();
         List<String> currencies = request.getTo();
         CryptocurrencyRates requestedRates = cryptocurrencyClient.getRatesByCurrencies(source, currencies);
-        CryptocurrencyExchangeResponse response = new CryptocurrencyExchangeResponse(request,requestedRates);
         return new CryptocurrencyExchangeResponse(request,requestedRates);
     }
 }

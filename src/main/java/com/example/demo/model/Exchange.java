@@ -9,7 +9,6 @@ import lombok.Setter;
 import java.util.LinkedHashMap;
 
 @Data
-//@JsonRootName(value = "OO")
 public class Exchange {
 
 
@@ -25,8 +24,8 @@ public class Exchange {
         LinkedHashMap<String, Double> rate = new LinkedHashMap<>();
         rate.put("rate", currencyRate);
         rate.put("amount", (double) request.getAmount());
-        rate.put("result", (request.getAmount()*(1-FEE)) * currencyRate);
-        rate.put("fee", FEE);
+        rate.put("result", (request.getAmount() * (1-FEE)) * currencyRate);
+        rate.put("fee", request.getAmount() * FEE * currencyRate);
         this.currencyExchange = rate;
         this.currencyName = currencyName;
     }
