@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 import com.example.demo.model.Exchange;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class CryptocurrencyExchangeResponse {
 
     private String from;
+
     @JsonProperty("to")
     private final List<Exchange> exchanges = new ArrayList<>();
 
@@ -37,7 +39,7 @@ public class CryptocurrencyExchangeResponse {
 
         currencies.forEach(currency -> {
             this.exchanges.add(
-                    new Exchange(request, requestedRates.getRates().get(currency)));
+                    new Exchange(request, requestedRates.getRates().get(currency), currency));
         });
     }
 
@@ -50,7 +52,7 @@ public class CryptocurrencyExchangeResponse {
 
         currencies.forEach(currency ->{
             futures.add(executor.submit(() ->
-                    new Exchange(request, requestedRates.getRates().get(currency))));
+                    new Exchange(request, requestedRates.getRates().get(currency), currency)));
         });
 
 
@@ -64,7 +66,6 @@ public class CryptocurrencyExchangeResponse {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
 
     }
 

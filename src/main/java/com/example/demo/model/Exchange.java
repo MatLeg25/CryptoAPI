@@ -12,17 +12,23 @@ import java.util.LinkedHashMap;
 //@JsonRootName(value = "OO")
 public class Exchange {
 
-    //TODO in JSON map as currency name
+
+    //TODO in JSON map currencyExchange as currency name
+    @JsonProperty("currency")
+    private String currencyName;
+    @JsonProperty("details")
     private LinkedHashMap<String, Double> currencyExchange;
     private static double FEE = 0.01;
 
 
-    public Exchange(CryptocurrencyExchangeRequest request, Double currencyRate) {
+    public Exchange(CryptocurrencyExchangeRequest request, Double currencyRate, String currencyName) {
         LinkedHashMap<String, Double> rate = new LinkedHashMap<>();
         rate.put("rate", currencyRate);
         rate.put("amount", (double) request.getAmount());
         rate.put("result", (request.getAmount()*(1-FEE)) * currencyRate);
         rate.put("fee", FEE);
         this.currencyExchange = rate;
+        this.currencyName = currencyName;
     }
+
 }
