@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class CryptocurrencyExchangeResponse {
 
     private String from;
-    @JsonProperty("exchange")
+    @JsonProperty("to")
     private final List<Exchange> exchanges = new ArrayList<>();
 
     @JsonIgnore
@@ -26,7 +26,7 @@ public class CryptocurrencyExchangeResponse {
 
     public CryptocurrencyExchangeResponse (CryptocurrencyExchangeRequest request, CryptocurrencyRates requestedRates) {
         this.setFrom(request.getFrom());
-        this.addRatesMT(request, requestedRates);
+        this.addRatesB(request, requestedRates);
         log.info(this.toString());
     }
 
@@ -56,7 +56,7 @@ public class CryptocurrencyExchangeResponse {
 
         try {
             for(int i=0;i<futures.size();i++) {
-                Exchange exchange = futures.get(i).get();
+                Exchange exchange = futures.get(0).get();
                 this.exchanges.add(exchange);
             }
         } catch (InterruptedException e) {
